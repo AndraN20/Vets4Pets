@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/medicalService")
 public class MedicalServiceController {
     private final MedicalServiceService medicalServiceService;

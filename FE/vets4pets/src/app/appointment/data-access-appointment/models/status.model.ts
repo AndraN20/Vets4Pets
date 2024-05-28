@@ -1,3 +1,6 @@
-export enum Status{
-  "created","confirmed","closed"
+export enum Status {
+  created = "created",
+  confirmed = "confirmed",
+  closed = "closed"
 }
+

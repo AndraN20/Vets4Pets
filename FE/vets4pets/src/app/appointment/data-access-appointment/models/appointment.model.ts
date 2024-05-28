@@ -5,7 +5,7 @@ export interface Appointment {
   id: number;
   animalName: string;
   doctorName: string;
-  dateTime: string; // In TypeScript, LocalDateTime is typically represented as an ISO 8601 string
+  dateTime: string;
   medicalServices: MedicalService[];
   diagnosis: string;
   status: Status;

@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+.id{
+    flex:1;
+    margin-left: 4rem;
+}
+
+.patient{
+    flex:3;
+}
+
+.doctor{
+    flex:3;
+
+}
+
+.date{
+    flex:3;
+}
+
+.diagnosis{
+    flex:6;
+}
+
+.total{
+    flex:2;
+}
+
+.box{
+    flex:5;
+}

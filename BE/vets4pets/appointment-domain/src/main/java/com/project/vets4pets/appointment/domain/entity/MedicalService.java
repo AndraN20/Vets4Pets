@@ -16,12 +16,12 @@ import java.util.List;
 public class MedicalService {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
     private double price;
 
-    @ManyToMany(mappedBy = "medicalServices")
-    private List<Appointment> appointments;
+//    @ManyToMany(mappedBy = "medicalServices")
+//    private List<Appointment> appointments;
 }

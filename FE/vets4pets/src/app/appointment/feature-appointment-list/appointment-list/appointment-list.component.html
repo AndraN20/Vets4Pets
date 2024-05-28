@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="filter-container">
+    <input type="text" class="search" placeholder="Search" />
+    <div class="filter-sort">
+      <button class="filter">Filter</button>
+      <button class="sort">Sort</button>
+    </div>
+  </div>
+  <div class="header">
+    <p class="columns id">ID</p>
+    <p class="columns patient">Patient</p>
+    <p class="columns doctor">Doctor Name</p>
+    <p class="columns date">Date</p>
+    <p class="columns diagnosis">Diagnosis</p>
+    <p class="columns total">Total cost</p>
+  </div>
+  @for (appointment of appointments; track appointment.id) {
+  <app-appointment-card
+    [appointment]="appointment"
+    (click)="navigateToAppointmentDetails(appointment.id)"
+  ></app-appointment-card>
+  }
+  <div class="buttons">
+    @for (page of pages; track page) {
+    <button
+      (click)="getAppointments(page)"
+      class="btn"
+      [class.selected]="page === selectedPage"
+    >
+      {{ page + 1 }}
+    </button>
+    }
+  </div>
+</div>

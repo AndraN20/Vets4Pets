@@ -1,0 +1,27 @@
+.card{
+    width:95vw;
+    height:70px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px 5px rgba(128, 128, 128, 0.3);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.status{
+    height:70px;
+    width:30px;
+    border-radius: 10px 0 0 10px;
+}
+
+.created{
+    background-color: gray;
+}
+
+.confirmed{
+    background-color: yellow;
+}
+
+.closed{
+    background-color: green;
+}

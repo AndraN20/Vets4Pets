@@ -1,0 +1,11 @@
+<div class="card">
+  <div [className]="'status ' + appointment.status"></div>
+  <p class="columns id">{{ appointment.id }}</p>
+  <p class="columns patient">{{ appointment.animalName }}</p>
+  <p class="columns doctor">{{ appointment.doctorName }}</p>
+  <p class="columns date">
+    {{ appointment.dateTime | date : "dd-MM-yyyy HH:mm" }}
+  </p>
+  <p class="columns diagnosis">{{ appointment.diagnosis }}</p>
+  <p class="columns total">{{ appointment.totalCost }}$</p>
+</div>

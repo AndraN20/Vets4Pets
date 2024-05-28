@@ -16,14 +16,14 @@ import java.util.List;
 @Table(name = "appointment")
 public class Appointment {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String animalName;
     private String doctorName;
     private LocalDateTime dateTime;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "appointment_medical_service",
             joinColumns = @JoinColumn(name = "appointment_id"),
@@ -32,5 +32,7 @@ public class Appointment {
     private List<MedicalService> medicalServices;
 
     private String diagnosis;
+
+    @Enumerated(EnumType.STRING)
     private Status status;
 }

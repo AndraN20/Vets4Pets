@@ -1,0 +1,61 @@
+<div class="container">
+  @if (appointment) {
+  <div class="identification">
+    <p class="id">#{{ appointment.id }}</p>
+    <p class="patient">{{ appointment.animalName }}</p>
+  </div>
+  <div class="info-box">
+    <div class="header">
+      <h2>Information</h2>
+    </div>
+    <div class="content">
+      <p class="doctor">
+        Assigned Doctor: <br />Dr. {{ appointment.doctorName }}
+      </p>
+      <p class="date">
+        Date of the appointment:
+        <br />{{ appointment.dateTime | date : "dd-MM-yyyy HH:mm" }}
+      </p>
+    </div>
+  </div>
+  <div class="info-box">
+    <div class="header">
+      <h2>Services</h2>
+    </div>
+    <div class="content">
+      @for (service of services; track service.id) {
+      <p class="service-name">{{ service.name }}</p>
+      <p class="service-price">{{ service.price }}$</p>
+      }
+      <p class="service-total">{{ appointment.totalCost }}$</p>
+    </div>
+  </div>
+  <div class="info-box">
+    <div class="header">
+      <h2>Diagnosis</h2>
+    </div>
+    <div class="content">
+      @if (appointment.diagnosis) {
+      <p class="diagnosis">{{ appointment.diagnosis }}</p>
+      } @if (!appointment.diagnosis) {
+      <p class="diagnosis">No diagnosis yet.</p>
+      }
+    </div>
+  </div>
+  <div class="buttons">
+    <button class="btn" (click)="navigateToAppointmentEdit(appointment.id)">
+      Edit appointment
+    </button>
+    <button class="btn" (click)="deleteAppointment(appointment.id)">
+      Delete appointment
+    </button>
+    <button
+      class="btn"
+      (click)="confirmAppointment()"
+      [disabled]="isConfirmed || isClicked"
+    >
+      Confirm appointment
+    </button>
+  </div>
+  }
+</div>
