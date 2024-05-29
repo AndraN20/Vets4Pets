@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e5514d27-818d-4a07-80a7-1e2f2f359b78" name="Changes" comment="fe added" />
+    <list default="true" id="e5514d27-818d-4a07-80a7-1e2f2f359b78" name="Changes" comment="appointment details" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,9 +38,25 @@
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/andra/OneDrive/Desktop/irian/Vets4Pets/FE",
     "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\IntelliJ IDEA 2023.2.2\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="vets4pets" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="vets4pets" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -59,6 +75,7 @@
       <updated>1716756865572</updated>
       <workItem from="1716756866191" duration="89000" />
       <workItem from="1716757305373" duration="141000" />
+      <workItem from="1716938017014" duration="97000" />
     </task>
     <task id="LOCAL-00001" summary="fe added">
       <option name="closed" value="true" />
@@ -68,7 +85,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716757380132</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="appointment details">
+      <option name="closed" value="true" />
+      <created>1716938094057</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1716938094057</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -76,6 +101,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fe added" />
-    <option name="LAST_COMMIT_MESSAGE" value="fe added" />
+    <MESSAGE value="appointment details" />
+    <option name="LAST_COMMIT_MESSAGE" value="appointment details" />
   </component>
 </project>
