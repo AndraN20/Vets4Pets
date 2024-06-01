@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Search } from '@appointment/data-access-appointment/models/search.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class NavigationService {
   }
 
   navigateToAppointments() {
-    this.router.navigateByUrl("/appointment", { skipLocationChange: true });
+    this.router.navigate(["appointment"]);
   }
 
   navigateToAppointmentEdit(id: number) {
@@ -22,6 +23,47 @@ export class NavigationService {
   }
 
   navigateToAppointmentAdd() {
-    this.router.navigate(["/appointment/add"]);
+    this.router.navigate(["appointment/add"]);
   }
+
+  navigateToFilteredPage(search: Search) {
+    const queryParams = createConditionalObject(search);
+    this.router.navigate(["appointment"], {
+      queryParams: queryParams
+    });
+  }
+
+
+}
+
+function createConditionalObject(obj: any) {
+  let newObj: any = {};
+  if (obj.name !== "") {
+    newObj.name = obj.name;
+  }
+  if (obj.animalName !== "") {
+    newObj.animalName = obj.animalName;
+  }
+  if (obj.doctorName !== "") {
+    newObj.doctorName = obj.doctorName;
+  }
+  if (obj.date !== "") {
+    newObj.date = obj.date;
+  }
+  if (obj.medicalService !== "") {
+    newObj.medicalService = obj.medicalService;
+  }
+  if (obj.diagnosis !== "") {
+    newObj.diagnosis = obj.diagnosis;
+  }
+  if (obj.status !== "") {
+    newObj.status = obj.status;
+  }
+  if (obj.sortField !== "") {
+    newObj.sortField = obj.sortField;
+  }
+  if (obj.direction !== "") {
+    newObj.direction = obj.direction;
+  }
+  return newObj;
 }

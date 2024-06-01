@@ -1,5 +1,5 @@
-import {Status} from "./status.model";
-import {MedicalService} from "./medical-service.model";
+import { Status } from "./status.model";
+import { MedicalService } from "./medical-service.model";
 
 export interface Appointment {
   id: number;
@@ -7,7 +7,7 @@ export interface Appointment {
   doctorName: string;
   dateTime: string;
   medicalServices: MedicalService[];
-  diagnosis: string;
+  diagnosis: string | null;
   status: Status;
   totalCost: number;
 }

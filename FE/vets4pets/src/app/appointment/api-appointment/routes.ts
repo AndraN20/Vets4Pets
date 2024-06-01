@@ -1,5 +1,5 @@
 import { Routes } from "@angular/router";
-import { AppointmentListComponent } from "../feature-appointment-list/appointment-list/appointment-list.component";
+import { AppointmentListComponent } from "@appointment/feature-appointment-list";
 import { AppointmentDetailsComponent } from "@appointment/feature-appointment-details/appointment-details/appointment-details.component";
 import { AppointmentFormComponent } from "@appointment/feature-appointment-form/appointment-form/appointment-form.component";
 

@@ -47,6 +47,23 @@
     gap:1rem;
 }
 
+p{
+    color: rgba(97, 97, 97, 1);
+}
 
+.searches{
+    background: rgb(97, 118, 71);
+    border:none;
+    border-radius: 15px;
+    padding: 0.4rem 0.5rem;
+    color: white;
+    box-shadow: 0 3px 3px 3px rgba(128,128,128,0.3);
+    cursor:pointer; 
+    text-align: center;
+    outline: none;
+}
 
+h2{
+    color:rgb(97, 118, 71);
+}
 

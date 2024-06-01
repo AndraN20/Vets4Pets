@@ -1,0 +1,32 @@
+h1,h2{
+    color: rgba(97, 118, 71, 1);
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputs{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.green-btn{
+    margin:1rem;
+}
+
+.information{
+    background-color: rgba(226, 255, 188, 1);
+    padding:5rem;
+}
+
+.service-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}

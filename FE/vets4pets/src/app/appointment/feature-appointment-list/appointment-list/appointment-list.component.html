@@ -1,18 +1,32 @@
 <div class="container">
   <div class="filter-container">
-    <input type="text" class="search" placeholder="Search" />
+    <button class="green-btn" (click)="toggleSearchPopUp()">Save search</button>
+    <form [formGroup]="savedSearchForm" (change)="saveSearchSubmit()">
+      <select
+        class="searches"
+        formControlName="savedSearch"
+        name="savedSearches"
+        id="savedSearches"
+      >
+        <option value="">Saved Searches</option>
+        @for (search of searches; track search.key) {
+        <option [value]="search.key">{{ search.key }}</option>
+        }
+      </select>
+    </form>
     <div class="filter-sort">
-      <button class="filter">Filter</button>
-      <button class="sort">Sort</button>
+      <button class="filter green-btn" (click)="toggleFilterPopUp()">
+        Filter
+      </button>
     </div>
   </div>
   <div class="header">
     <p class="columns id">ID</p>
     <p class="columns patient">Patient</p>
-    <p class="columns doctor">Doctor Name</p>
+    <p class="columns doctor">Doctor</p>
     <p class="columns date">Date</p>
     <p class="columns diagnosis">Diagnosis</p>
-    <p class="columns total">Total cost</p>
+    <p class="columns total">Total</p>
   </div>
   @for (appointment of appointments; track appointment.id) {
   <app-appointment-card
@@ -23,7 +37,7 @@
   <div class="buttons">
     @for (page of pages; track page) {
     <button
-      (click)="getAppointments(page)"
+      (click)="getFilteredAppointments(page)"
       class="btn"
       [class.selected]="page === selectedPage"
     >
@@ -31,4 +45,19 @@
     </button>
     }
   </div>
+  <button class="green-btn" (click)="navigateToAppointmentAdd()">
+    Add new appointment
+  </button>
 </div>
+
+@if (filterPopUp) {
+<app-filters (filterApplied)="onFilterApplied()"> </app-filters>
+} @if(searchPopUp){
+<form [formGroup]="searchForm" class="modal" (ngSubmit)="onSubmit()">
+  <button (click)="toggleSearchPopUp()" class="x-btn">x</button>
+  <h2>Save a new search</h2>
+  <label for="searchName">Search Name:</label>
+  <input type="text" formControlName="searchName" id="searchName" />
+  <button type="submit" class="green-btn">Save Search</button>
+</form>
+}

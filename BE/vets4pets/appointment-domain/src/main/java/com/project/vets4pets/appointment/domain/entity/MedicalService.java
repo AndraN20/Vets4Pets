@@ -21,7 +21,4 @@ public class MedicalService {
 
     private String name;
     private double price;
-
-//    @ManyToMany(mappedBy = "medicalServices")
-//    private List<Appointment> appointments;
 }

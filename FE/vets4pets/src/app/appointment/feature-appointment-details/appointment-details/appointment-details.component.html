@@ -3,58 +3,79 @@
   <div class="identification">
     <p class="id">#{{ appointment.id }}</p>
     <p class="patient">{{ appointment.animalName }}</p>
+    @if (isCreated) {
+    <button class="green-btn" (click)="confirmAppointment()">
+      Confirm appointment
+    </button>
+    } @if(!isCreated){
+    <p class="confirmed">Confirmed</p>
+    }
   </div>
-  <div class="info-box">
-    <div class="header">
-      <h2>Information</h2>
+  <div class="info-boxes">
+    <div class="info-box">
+      <div class="header">
+        <h2>Information</h2>
+      </div>
+      <div class="content">
+        <p class="doctor">
+          Assigned Doctor: <br />Dr. {{ appointment.doctorName }}
+        </p>
+        <p class="date">
+          Date of the appointment:
+          <br />{{ appointment.dateTime | date : "dd-MM-yyyy HH:mm" }}
+        </p>
+      </div>
     </div>
-    <div class="content">
-      <p class="doctor">
-        Assigned Doctor: <br />Dr. {{ appointment.doctorName }}
-      </p>
-      <p class="date">
-        Date of the appointment:
-        <br />{{ appointment.dateTime | date : "dd-MM-yyyy HH:mm" }}
-      </p>
+    <div class="info-box">
+      <div class="header">
+        <h2>Services</h2>
+      </div>
+      <div class="content">
+        @for (service of services; track service.id) {
+        <div class="service">
+          <p class="service-name">{{ service.name }}</p>
+          <p class="service-price">{{ service.price }}$</p>
+        </div>
+        }
+        <div class="service">
+          <p class="service-name">Total</p>
+          <p class="service-total">{{ appointment.totalCost }}$</p>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="info-box">
-    <div class="header">
-      <h2>Services</h2>
-    </div>
-    <div class="content">
-      @for (service of services; track service.id) {
-      <p class="service-name">{{ service.name }}</p>
-      <p class="service-price">{{ service.price }}$</p>
-      }
-      <p class="service-total">{{ appointment.totalCost }}$</p>
-    </div>
-  </div>
-  <div class="info-box">
-    <div class="header">
-      <h2>Diagnosis</h2>
-    </div>
-    <div class="content">
-      @if (appointment.diagnosis) {
-      <p class="diagnosis">{{ appointment.diagnosis }}</p>
-      } @if (!appointment.diagnosis) {
-      <p class="diagnosis">No diagnosis yet.</p>
-      }
+    <div class="info-box">
+      <div class="header">
+        <h2>Diagnosis</h2>
+      </div>
+      <div class="content">
+        @if (appointment.diagnosis) {
+        <p class="diagnosis">{{ appointment.diagnosis }}</p>
+        } @if (!appointment.diagnosis) {
+        <p class="diagnosis">No diagnosis yet.</p>
+        @if (!isCreated) {
+        <button class="btn green-btn" (click)="toggleDiagnosis()">
+          Add diagnosis
+        </button>
+        @if (showDiagnosisForm) {
+        <textarea [(ngModel)]="diagnosis"></textarea>
+        <button class="btn green-btn" (click)="saveDiagnosis()">
+          Save diagnosis
+        </button>
+        } } } @if (isCreated) {
+        <p>Confirm appointment before adding diagnosis.</p>
+        }
+      </div>
     </div>
   </div>
   <div class="buttons">
-    <button class="btn" (click)="navigateToAppointmentEdit(appointment.id)">
+    <button
+      class="btn green-btn"
+      (click)="navigateToAppointmentEdit(appointment.id)"
+    >
       Edit appointment
     </button>
-    <button class="btn" (click)="deleteAppointment(appointment.id)">
+    <button class="btn green-btn" (click)="deleteAppointment(appointment.id)">
       Delete appointment
-    </button>
-    <button
-      class="btn"
-      (click)="confirmAppointment()"
-      [disabled]="isConfirmed || isClicked"
-    >
-      Confirm appointment
     </button>
   </div>
   }

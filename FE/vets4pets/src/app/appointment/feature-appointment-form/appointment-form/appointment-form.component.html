@@ -1,1 +1,71 @@
-<p>appointment-form works!</p>
+<div class="container">
+  @if (appointment.id===-1) {
+  <h1>Add an appointment</h1>
+  } @if (appointment.id!==-1) {
+  <h1>Edit an appointment</h1>
+  }
+  <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
+    <div class="inputs">
+      <label class="input-title" for="patient">Patient Name:</label>
+      <input type="text" formControlName="patient" class="input" id="patient" />
+
+      <label class="input-title" for="doctor">Doctor Name:</label>
+      <input type="text" formControlName="doctor" class="input" id="doctor" />
+
+      <label class="input-title" for="date">Date:</label>
+      <input
+        type="datetime-local"
+        formControlName="date"
+        class="input"
+        id="date"
+      />
+    </div>
+    <div class="inputs">
+      <label class="input-title" for="service">Services:</label>
+      <select formControlName="service" name="service" id="service">
+        @for (service of services; track service.id) {
+        <option [value]="service.id">
+          {{ service.name }}
+        </option>
+        }
+      </select>
+      <div class="buttons">
+        <button type="button" class="green-btn" (click)="addSelectedService()">
+          Select Service
+        </button>
+        <button type="button" class="green-btn" (click)="toggleServiceForm()">
+          Add new service
+        </button>
+      </div>
+      <button type="submit" class="green-btn">Save appointment</button>
+    </div>
+  </form>
+  <div class="information">
+    <h2>Selected Services</h2>
+    @for (service of selectedServices; track service.id) {
+    <div class="service-row">
+      <p>{{ service.name }}</p>
+      <p>{{ service.price }}$</p>
+    </div>
+    }
+    <div class="service-row">
+      <p>Total</p>
+      <p>{{ total }}$</p>
+    </div>
+  </div>
+</div>
+@if (showServiceForm) {
+
+<form [formGroup]="newServiceForm" class="modal" (ngSubmit)="onServiceSubmit()">
+  <button (click)="toggleServiceForm()" class="x-btn">x</button>
+  <h2>Add new service</h2>
+  <label for="serviceName">Service Name:</label>
+  <input type="text" formControlName="name" id="serviceName" />
+
+  <label for="servicePrice">Service Price:</label>
+  <input type="number" formControlName="price" id="servicePrice" />
+
+  <button type="submit" class="green-btn">Add Service</button>
+</form>
+
+}

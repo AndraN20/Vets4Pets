@@ -1,0 +1,82 @@
+<form [formGroup]="filterForm" (ngSubmit)="onSubmit()" class="modal">
+  <button (click)="togglePopUp()" class="x-btn">x</button>
+  <h2>Apply filters/sorts</h2>
+  <div>
+    <label for="animalName">Animal Name:</label>
+    <input
+      id="animalName"
+      formControlName="animalName"
+      placeholder="Animal Name"
+    />
+  </div>
+
+  <div>
+    <label for="doctorName">Doctor Name:</label>
+    <input
+      id="doctorName"
+      formControlName="doctorName"
+      placeholder="Doctor Name"
+    />
+  </div>
+
+  <div>
+    <label for="dateTime">Date:</label>
+    <input
+      id="dateTime"
+      formControlName="date"
+      placeholder="Date"
+      type="date"
+    />
+  </div>
+
+  <div>
+    <label for="medicalService">Medical Service Name:</label>
+    <select id="medicalService" formControlName="medicalService">
+      <option value="">Select Service</option>
+      @for (service of services; track service.id) {
+      <option value="{{ service.name }}">{{ service.name }}</option>
+      }
+    </select>
+  </div>
+
+  <div>
+    <label for="diagnosis">Diagnosis:</label>
+    <input id="diagnosis" formControlName="diagnosis" placeholder="Diagnosis" />
+  </div>
+
+  <div>
+    <label for="status">Status:</label>
+    <select id="status" formControlName="status">
+      <option value="">Select Status</option>
+      <option value="created">Created</option>
+      <option value="confirmed">Confirmed</option>
+      <option value="closed">Closed</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="sortField">Sort Field:</label>
+    <select id="sortField" formControlName="sortField">
+      <option value="">Select Sort Field</option>
+      <option value="appointmentId">Appointment Id</option>
+      <option value="animalName">Animal Name</option>
+      <option value="doctorName">Doctor Name</option>
+      <option value="date">Date</option>
+      <option value="medicalService">Medical Service</option>
+      <option value="diagnosis">Diagnosis</option>
+      <option value="status">Status</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="direction">Sort Direction:</label>
+    <select id="direction" formControlName="direction">
+      <option value="">Select sorting direction</option>
+      <option value="ASC">Ascending</option>
+      <option value="DESC">Descending</option>
+    </select>
+  </div>
+
+  <button class="green-btn" type="submit">Apply Filters</button>
+  <button class="green-btn" (click)="removeFilters()">Remove Filters</button>
+</form>

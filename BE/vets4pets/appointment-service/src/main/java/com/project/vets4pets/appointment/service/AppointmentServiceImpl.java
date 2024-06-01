@@ -6,17 +6,18 @@ import com.project.vets4pets.appointment.domain.entity.Appointment;
 import com.project.vets4pets.appointment.domain.entity.MedicalService;
 import com.project.vets4pets.appointment.domain.entity.Status;
 import com.project.vets4pets.appointment.domain.repository.AppointmentRepository;
+import com.project.vets4pets.appointment.domain.specification.AppointmentSpecification;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -61,21 +62,23 @@ public class AppointmentServiceImpl implements AppointmentService {
         if (appointment.getDiagnosis() != null && appointment.getStatus() == Status.created) {
                 throw new IllegalStateException("Diagnosis can only be set for confirmed appointments.");
         }
-        else if ( appointment.getDiagnosis() != null && appointment.getStatus() == Status.confirmed && existingAppointment.getDiagnosis() ==null) {
+        else if ( appointment.getDiagnosis() != null && appointment.getStatus() == Status.confirmed && existingAppointment.getDiagnosis() == null) {
             appointment.setStatus(Status.closed);
         }
         return this.appointmentRepository.save(appointment);
     }
 
     @Override
-    public Page<Appointment> getAppointmentsOnPage(Pageable pageable){
-        Pageable pageableSorted = PageRequest.of(
-                pageable.getPageNumber(),
-                5,
-                Sort.by(Sort.Direction.DESC, "dateTime")
-        );
+    public Page<Appointment> getFilteredAppointments(String animalName, String doctorName, Status status, LocalDateTime dateTime, String diagnosis, String serviceName, int page, int size, String sortField, Sort.Direction direction) {
+        Specification<Appointment> specification = Specification.where(AppointmentSpecification.filterByAnimalName(animalName))
+                .and(AppointmentSpecification.filterByDoctorName(doctorName))
+                .and(AppointmentSpecification.filterByStatus(status))
+                .and(AppointmentSpecification.filterByDateTime(dateTime))
+                .and(AppointmentSpecification.filterByDiagnosis(diagnosis))
+                .and(AppointmentSpecification.filterByMedicalService(serviceName));
 
-        return this.appointmentRepository.findAll(pageableSorted);
+        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortField));
+        return this.appointmentRepository.findAll(specification, pageable);
     }
 
     @PostConstruct
@@ -101,13 +104,25 @@ public class AppointmentServiceImpl implements AppointmentService {
         List<MedicalService> servicesList4 = Arrays.asList(service1, service2, service3);
 
         Appointment appointment1 = new Appointment(null, "Lilo", "Jessica Brown", LocalDateTime.now().plusDays(1), servicesList1, null, null);
-        saveAppointment(appointment1);
+        appointment1 = saveAppointment(appointment1);
+        appointment1.setStatus(Status.confirmed);
+        editAppointment(appointment1);
 
         Appointment appointment2 = new Appointment(null, "Max", "Jessica Brown", LocalDateTime.now().plusDays(2), servicesList2, null, null);
-        saveAppointment(appointment2);
+        appointment2 = saveAppointment(appointment2);
+        appointment2.setDiagnosis("Healthy");
+        appointment2.setStatus(Status.closed);
+        editAppointment(appointment2);
+
+
         saveAppointment(new Appointment(null, "Puffy", "Jessica Brown", LocalDateTime.now().plusDays(3), servicesList4, null, null));
-        saveAppointment(new Appointment(null, "Charlie", "Elisabeth Taylor", LocalDateTime.now().plusDays(4), servicesList3, null, null));
+        Appointment appointment3 = saveAppointment(new Appointment(null, "Charlie", "Elisabeth Taylor", LocalDateTime.now().plusDays(4), servicesList3, null, null));
+        appointment3.setStatus(Status.confirmed);
+        editAppointment(appointment3);
         saveAppointment(new Appointment(null, "Cleo", "John Anderson", LocalDateTime.now().plusDays(5), servicesList2, null, null));
-        saveAppointment(new Appointment(null, "Daisy", "Elisabeth Taylor", LocalDateTime.now().plusDays(6), servicesList3, null, null));
+        Appointment appointment4 = saveAppointment(new Appointment(null, "Daisy", "Elisabeth Taylor", LocalDateTime.now().plusDays(6), servicesList3, null, null));
+        appointment4.setStatus(Status.confirmed);
+        editAppointment(appointment4);
+
     }
 }

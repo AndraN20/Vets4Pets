@@ -1,0 +1,56 @@
+h2{
+    color: rgba(97, 118, 71, 1);
+    background-color:rgba(226, 255, 188, 1);
+    margin:2rem;
+}
+
+.id,.patient{
+    color: rgb(66, 105, 22);
+    font-weight: bolder;
+}
+
+.identification{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    left: 5rem;
+}
+
+.info-boxes{
+    display: flex;
+    flex-direction: row;
+}
+
+.info-box{
+    flex:3;
+    text-align: center;
+}
+
+.service{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.buttons{
+    margin-top: 5rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+textarea{
+    margin: 2rem;
+    border-radius: 10px;
+    height: 5rem;
+}
+
+.confirmed{
+   color: rgb(66, 105, 22);
+   font-weight: bolder;
+}
+
+.green-btn:disabled {
+    background: grey;
+}
